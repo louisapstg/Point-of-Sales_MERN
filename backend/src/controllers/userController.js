@@ -13,10 +13,6 @@ const registerUser = asyncHanlder(async (req, res) => {
         res.status(400);
         throw new Error("Password must be at least 6 characters");
     }
-    if (password.length > 23) {
-        res.status(400);
-        throw new Error("Password must be at most 23 characters");
-    }
 
     // Check if user already exists
     const userExists = await User.findOne({ email })
@@ -29,7 +25,7 @@ const registerUser = asyncHanlder(async (req, res) => {
     const user = await User.create({
         name,
         email,
-        password
+        password,
     });
 
     if (user) {
